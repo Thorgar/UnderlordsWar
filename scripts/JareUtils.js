@@ -18,3 +18,17 @@ if ( !window.requestAnimationFrame ) {
 		};
 	} )();
 }
+
+
+// http://stackoverflow.com/questions/1114465/getting-mouse-location-in-canvas/6551032#6551032
+function GetRelativePosition(target, x,y) {
+	//this section is from http://www.quirksmode.org/js/events_properties.html
+	// jQuery normalizes the pageX and pageY
+	// pageX,Y are the mouse positions relative to the document
+	// offset() returns the position of the element relative to the document
+	var offset = $(target).offset();
+	var x = x - offset.left;
+	var y = y - offset.top;
+
+	return {"x": x, "y": y};
+}
