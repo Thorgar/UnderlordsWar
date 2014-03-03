@@ -25,7 +25,9 @@ function StartGame() {
 			],
 			["images", function (cb, i) {
 					LoadImages(MainGame.images, {
-						sun : "images/sun.png"
+						'buildings' : 'images/buildingSprite.png',
+						'grounds' : 'images/groundSprite.png',
+						'units' : 'images/unitSprite.png' 
 					}, function () {
 						cb(i);
 					})
@@ -56,9 +58,9 @@ function StartMainMenu() {
 		], function () {
 		// All done, go!
 		InputManager.reset();
-		MainMenu = new Menu("Lesson 4",
+		MainMenu = new Menu("Underlords War",
 				["Play", "Settings", "Help", "Credits"],
-				"(C) Copyright 2011 by Javier Arevalo",
+				"",
 				70, 50, 400,
 				function (numItem) {
 				if (numItem == 0)
