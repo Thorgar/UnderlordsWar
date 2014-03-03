@@ -1,68 +1,99 @@
-// ----------------------------------------
-// Actual game code goes here.
-
-// Global vars
-fps = null; 
-canvas = null;
-ctx = null;
-
-// ----------------------------------------
-
-// Our 'game' variables
-var posX = 0;
-var posY = 0;
-var velX = 100;
-var velY = 100;
-var sizeX = 80;
-var sizeY = 40;
-var paused = true;
-
-function GameTick(elapsed)
-{
-    fps.update(elapsed);
-
+// ----------------------------------
+// Game class
+Game = function () {
+	this.posX = 0;
+	this.posY = 0;
+	this.velX = 100;
+	this.velY = 100;
+	this.sizeX = 80;
+	this.sizeY = 40;
+	this.gravityY = 900;
+	this.paused = false;
+	this.images = {};
+	this.InGameMenu = null;
+}
+Game.prototype.Tick = function (elapsed) {
+	fps.update(elapsed);
+	this.Logic(elapsed);
+	this.Render(elapsed);
+}
+Game.prototype.Logic = function (elapsed) {
+	// --- Input
 	InputManager.padUpdate();
-	
-    // --- Logic
-	
-	if (InputManager.padPressed & InputManager.PAD.CANCEL)
-		paused = !paused;
-	
-	if (!paused)
-	{	
-		// Movement physics
-		posX += velX*elapsed;
-		posY += velY*elapsed;
-		// Collision detection and response
-		if ( (posX <= 0 && velX < 0) || (posX >= canvas.width-sizeX && velX > 0) )
-			velX = -velX;
-		if ( (posY <= 0 && velY < 0) || (posY >= canvas.height-sizeY && velY > 0) )
-			velY = -velY;
+	// --- Logic
+	if (InputManager.padPressed & InputManager.PAD.CANCEL) {
+		this.paused = true;
+		this.StartInGameMenu();
 	}
-	// --- Rendering
-
+	if (!this.paused) {
+		if ((InputManager.padPressed & InputManager.PAD.OK) && this.velY >= -10) {
+			AudioManager.play("jump");
+			this.velY = -1000;
+		}
+		// Movement physics
+		this.posX += this.velX * elapsed;
+		this.posY += (this.velY + 0.5 * this.gravityY * elapsed) * elapsed;
+		this.velY += this.gravityY * elapsed;
+		// Collision detection and response
+		var bouncedX = false,
+		bouncedY = false;
+		if ((this.posX <= 0 && this.velX < 0) || (this.posX >= canvas.width - this.sizeX && this.velX > 0)) {
+			this.velX = -this.velX;
+			bouncedX = true;
+		}
+		if ((this.posY <= 0 && this.velY < 0) || (this.posY >= canvas.height - this.sizeY && this.velY > 0)) {
+			this.velY = -this.velY * 0.7;
+			bouncedY = true;
+		}
+		if (bouncedX)
+			AudioManager.play("ping");
+		if (bouncedY)
+			AudioManager.play("bounce");
+	}
+}
+Game.prototype.Render = function (elapsed) {
 	// Clear the screen
-	ctx.fillStyle = "cyan";
+	var grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+	grad.addColorStop(0, '#06B');
+	grad.addColorStop(0.9, '#fff');
+	grad.addColorStop(0.9, '#3C0');
+	grad.addColorStop(1, '#fff');
+	ctx.fillStyle = grad;
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	// Render objects
-	ctx.strokeRect(posX, posY, sizeX, sizeY);
+
+	ctx.strokeRect(this.posX, this.posY, this.sizeX, this.sizeY);
+	ctx.textAlign = "center";
 	ctx.fillStyle = "red";
 	ctx.font = "10px sans-serif";
-	ctx.fillText("Hello Mike!", posX+10, posY+25);
+	ctx.fillText("Hello World!", this.posX + this.sizeX / 2, this.posY + 25);
 	// Paused / Unpaused text
-	ctx.fillStyle = "white";
-	ctx.font = "22px sans-serif";
-	ctx.fillText(paused? "Paused" : "Running", 380, 25);
-
+	//ctx.textAlign = "center";
+	//ctx.fillStyle = "white";
+	//ctx.font = "22px sans-serif";
+	//ctx.fillText(this.paused? "Paused" : "Running", canvas.width/2, 25);
 }
-
-$(document).ready(function() {
-    canvas = document.getElementById("level");
-    ctx = canvas.getContext("2d");
-    fps = new FPSMeter("fpsmeter", document.getElementById("fpscontainer"));
-	InputManager.connect(document, canvas);
-
+Game.prototype.StartInGameMenu = function () {
 	InputManager.reset();
-	GameLoopManager.run(GameTick);
-	
-});
+	var bindThis = this;
+	this.InGameMenu = new Menu("In-game Menu",
+			["Continue", "Quit"],
+			"",
+			70, 50, 400,
+			function (numItem) {
+			if (numItem == 0) {
+				GameLoopManager.run(function (elapsed) {
+					bindThis.Tick(elapsed);
+				});
+				bindThis.paused = false;
+				bindThis.InGameMenu = null;
+			} else if (numItem == 1)
+				StartMainMenu();
+		},
+			function (elapsed) {
+			bindThis.Render(elapsed);
+		});
+	GameLoopManager.run(function (elapsed) {
+		bindThis.InGameMenu.Tick(elapsed);
+	});
+}
