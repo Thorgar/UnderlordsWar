@@ -1,4 +1,21 @@
 body {
 	background-color: chocolate;
+}
 
+#gameTitle{
+	text-align: center;
+}
+.fpsmeter {
+	padding: 0;
+    margin: 0;
+	width: 100%;
+	text-align: center;
+}
+ .fpsmeter p {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+#screen {
+	display:block; margin:0 auto; background-color:#F0F;
 }
