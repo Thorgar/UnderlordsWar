@@ -1,0 +1,17 @@
+BGM:
+- title-screen
+- ingame
+
+
+Effects:
+- imp-digging
+- imp-walking
+- imp-defending
+- imp-grabbling
+- imp-idle
+- rat-attacking
+- rat-walking
+- rat-defending
+- rat-grabbling
+- rat-idle
+- mark-earth
