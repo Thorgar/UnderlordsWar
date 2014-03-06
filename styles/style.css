@@ -19,6 +19,7 @@ hgroup{
 	background: -webkit-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* Safari 5.1 to 6.0 */
 	background: -o-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* For Opera 11.6 to 12.0 */
 	background: -moz-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* For Firefox 3.6 to 15 */
+	background: -ms-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* For Internet Explorer 10 */
 	background: radial-gradient(to center, rgba(165,82,0,1), rgba(165,82,0,0)); /* Standard syntax */
 }
 aside{
@@ -27,6 +28,7 @@ aside{
 	background: -webkit-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* Safari 5.1 to 6.0 */
 	background: -o-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* For Opera 11.6 to 12.0 */
 	background: -moz-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* For Firefox 3.6 to 15 */
+	background: -ms-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* For Internet Explorer 10 */
 	background: radial-gradient(to center, rgba(165,82,0,1), rgba(165,82,0,0)); /* Standard syntax */
 }
 canvas{
@@ -34,6 +36,7 @@ canvas{
 	-webkit-border-image:url('../images/canvasBorder.png') 20 20 20 20 round; /* Safari 5 */
 	-o-border-image:url('../images/canvasBorder.png') 20 20 20 20 round; /* Opera 10.5-12.1 */
 	border-image:url('../images/canvasBorder.png') 20 20 20 20 round;
+	border-style:solid; /* need for firefox and IE to display border */
 }
 
 #gameTitle{
