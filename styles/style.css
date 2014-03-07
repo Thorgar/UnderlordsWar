@@ -1,11 +1,29 @@
-body {
+/**** apply on the whole page ****/
+* {
 	color: #FFF1C4;
+	padding: 0;
+	margin: 0;
+}
+
+/**** apply on tag ****/
+header, section, footer, aside, nav, article, figure, figcaption, hgroup {
+	display: block;
+}
+body {
 	background-image:url('../images/bodyBackground.png');
 	text-align: center;
 }
 footer {
 	padding-top: 15px;
 	clear: both;
+}
+hgroup{
+	margin: 15px 30% 5px 30%;
+	background: -webkit-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* Safari 5.1 to 6.0 */
+	background: -o-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* For Opera 11.6 to 12.0 */
+	background: -moz-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* For Firefox 3.6 to 15 */
+	background: -ms-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* For Internet Explorer 10 */
+	background: radial-gradient(to center, rgba(165,82,0,1), rgba(165,82,0,0)); /* Standard syntax */
 }
 h1 {
 	font-size:250%;
@@ -14,15 +32,14 @@ h2 {
 	font-size:85%;
 	padding-bottom: 5px;
 }
-hgroup{
-	margin: 0 30%;
-	background: -webkit-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* Safari 5.1 to 6.0 */
-	background: -o-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* For Opera 11.6 to 12.0 */
-	background: -moz-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* For Firefox 3.6 to 15 */
-	background: -ms-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* For Internet Explorer 10 */
-	background: radial-gradient(to center, rgba(165,82,0,1), rgba(165,82,0,0)); /* Standard syntax */
+canvas{
+	border-width: 20px;
+	-webkit-border-image:url('../images/canvasBorder.png') 20 20 20 20 round; /* Safari 5 */
+	-o-border-image:url('../images/canvasBorder.png') 20 20 20 20 round; /* Opera 10.5-12.1 */
+	border-image:url('../images/canvasBorder.png') 20 20 20 20 round;
+	border-style:solid; /* need for firefox and IE to display border */
 }
-aside{
+details{
 	margin: 0 42%;
 	padding: 5px 0;
 	background: -webkit-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* Safari 5.1 to 6.0 */
@@ -31,23 +48,8 @@ aside{
 	background: -ms-radial-gradient(center,rgba(165,82,0,1),rgba(165,82,0,0)); /* For Internet Explorer 10 */
 	background: radial-gradient(to center, rgba(165,82,0,1), rgba(165,82,0,0)); /* Standard syntax */
 }
-canvas{
-	border-width: 20px;
-	-webkit-border-image:url('../images/canvasBorder.png') 20 20 20 20 round; /* Safari 5 */
-	-o-border-image:url('../images/canvasBorder.png') 20 20 20 20 round; /* Opera 10.5-12.1 */
-	border-image:url('../images/canvasBorder.png') 20 20 20 20 round;
-	border-style:solid; /* need for firefox and IE to display border */
-}
 
-#gameTitle{
-	text-align: center;
-}
-#screen {
-	display:block;
-	margin:0 auto;
-	background-color:#F0F;
-}
-
+/**** apply on class ****/
 .fpsmeter {
 	padding: 0;
     margin: 0;
@@ -57,4 +59,19 @@ canvas{
  .fpsmeter p {
 	margin-top: 0px;
 	margin-bottom: 0px;
+}
+
+/**** apply on id ****/
+#wrapper{
+	width: 960px;
+	margin: 15px auto;
+	background: rgba(165,82,0,0.7);
+}
+#gameTitle{
+	text-align: center;
+}
+#screen {
+	display:block;
+	margin:0 auto;
+	background-color:#F0F;
 }
