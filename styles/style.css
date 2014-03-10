@@ -63,9 +63,13 @@ details{
 
 /**** apply on id ****/
 #wrapper{
-	width: 960px;
+	width: 1350px;
 	margin: 15px auto;
-	background: rgba(165,82,0,0.7);
+	background: -webkit-radial-gradient(center,rgba(187,149,2,1),rgba(187,149,2,0)); /* Safari 5.1 to 6.0 */
+	background: -o-radial-gradient(center,rgba(187,149,2,1),rgba(187,149,2,0)); /* For Opera 11.6 to 12.0 */
+	background: -moz-radial-gradient(center,rgba(187,149,2,1),rgba(187,149,2,0)); /* For Firefox 3.6 to 15 */
+	background: -ms-radial-gradient(center,rgba(187,149,2,1),rgba(187,149,2,0)); /* For Internet Explorer 10 */
+	background: radial-gradient(to center, rgba(187,149,2,1), rgba(187,149,2,0)); /* Standard syntax */
 }
 #gameTitle{
 	text-align: center;
