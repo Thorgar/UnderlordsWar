@@ -40,21 +40,10 @@ Game.prototype.Render = function (elapsed) {
 	// Clear the screen		
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	// Render objects	
-    ctx.drawImage(this.images['units'], this.posX, this.posY);		
-	for (var r = 0; r < mapInformations.rowTileCount; r++) {
-			for (var c = 0; c < mapInformations.colTileCount; c++) {
-				var tile = mapInformations.ground[r][c];
-				var tileRow = (tile / mapInformations.imageNumTiles) | 0;
-				var tileCol = (tile % mapInformations.imageNumTiles) | 0;
-				ctx.drawImage(this.images['grounds'], (tileCol * mapInformations.tileSize), (tileRow * mapInformations.tileSize), mapInformations.tileSize, mapInformations.tileSize, (c * mapInformations.tileSize), (r * mapInformations.tileSize), mapInformations.tileSize, mapInformations.tileSize);
-
-				var tile = mapInformations.layer01[r][c];
-				var tileRow = (tile / mapInformations.imageNumTiles) | 0;
-				var tileCol = (tile % mapInformations.imageNumTiles) | 0;
-				ctx.drawImage(this.images['buildings'], (tileCol * mapInformations.tileSize), (tileRow * mapInformations.tileSize), mapInformations.tileSize, mapInformations.tileSize, (c * mapInformations.tileSize), (r * mapInformations.tileSize), mapInformations.tileSize, mapInformations.tileSize);
-
-			}
-		}
+  
+	TileEngine(ctx,this.images['grounds'], this.images['buildings']);
+	ctx.drawImage(this.images['units'], this.posX, this.posY);		
+	
 }
 
 Game.prototype.StartInGameMenu = function () {
