@@ -41,7 +41,7 @@ Game.prototype.Render = function (elapsed) {
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	// Render objects	
   
-	TileEngine(ctx,this.images['grounds'], this.images['buildings']);
+	TileEngine(ctx,this.images['grounds'], this.images['buildings'], Level2);
 	ctx.drawImage(this.images['units'], this.posX, this.posY);		
 	
 }
