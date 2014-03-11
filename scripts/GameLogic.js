@@ -25,6 +25,15 @@ Game.prototype.Logic = function (elapsed) {
 		this.paused = true;
 		this.StartInGameMenu();
 	}
+	
+	if (InputManager.padPressed & InputManager.PAD.OK)
+	{
+		var coordsX = Math.floor((InputManager.lastMouseX-21) / 60);
+		var coordsY = Math.floor((InputManager.lastMouseY-21) / 60);
+		
+		Level2.mineralLayer[coordsY][coordsX] = 0;
+	}
+	
 	if (!this.paused) {
 		this.posX += this.velX*elapsed;
 		this.posY += this.velY*elapsed;
@@ -43,6 +52,8 @@ Game.prototype.Render = function (elapsed) {
   
 	TileEngine(ctx,this.images['grounds'], this.images['buildings'], Level2);
 	ctx.drawImage(this.images['units'], this.posX, this.posY);		
+	ctx.fillText("x = " +(InputManager.lastMouseX-20),70, 100);
+	ctx.fillText("y = " +(InputManager.lastMouseY-20),70, 150);
 	
 }
 
