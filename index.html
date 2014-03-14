@@ -17,6 +17,8 @@
 	<script language="javascript" src="scripts\GameLogic.js"></script>		
 	<script language="javascript" src="scripts\MenuHandler.js"></script>
 	<script language="javascript" src="scripts\TileEngine.js"></script>	
+	<script language="javascript" src="scripts\PathFinding.js"></script>	
+	
 	<link rel="stylesheet" href="styles\style.css">
   </head>
   <body>
@@ -28,7 +30,9 @@
 	    </hgroup>
 	  </header>
 	  <section>
-        <canvas id="screen" width="1200" height="840"></canvas>
+		<div id="screen_div">
+			<canvas id="screen" width="1200" height="840"></canvas>
+		</div>
 	    <details>
 	      <summary>Click for fps</summary>
 	      <div id="fpscontainer"></div>
